@@ -4,7 +4,10 @@
   "description": "Clone da plataforma tab-news criada como prática pedagógica do curso.dev",
   "main": "index.js",
   "scripts": {
-    "dev": "docker compose -f ./infra/compose.yaml up -d; next dev; docker compose -f ./infra/compose.yaml down",
+    "dev": "npm run services:up && next dev",
+    "services:up": "docker compose -f infra/compose.yaml up -d",
+    "services:stop": "docker compose -f infra/compose.yaml stop",
+    "services:down": "docker compose -f infra/compose.yaml down",
     "lint:check": "prettier --check .",
     "lint:fix": "prrettier --write .",
     "test": "jest",
