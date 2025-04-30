@@ -1,7 +1,15 @@
 const { exec } = require("node:child_process");
 
+const dotenv = require("dotenv");
+dotenv.config({
+  path: ".env.development",
+});
+
 function checkPostgres() {
-  exec("docker exec postgres-dev pg_isready --host localhost", handleReturn);
+  exec(
+    `docker exec postgres-dev pg_isready --host ${process.env.POSTGRES_HOST}`,
+    handleReturn,
+  );
 
   function handleReturn(error, stdout) {
     if (stdout.search("accepting connections") === -1) {
